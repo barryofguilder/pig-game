@@ -13,8 +13,24 @@ export default class GameBoardComponent extends Component {
   @tracked currentTurnScore = 0;
   @tracked hasWinner = false;
 
+  get player1Turn() {
+    return this.currentPlayer === 1;
+  }
+
+  get player2Turn() {
+    return this.currentPlayer === 2;
+  }
+
+  nextPlayer() {
+    if (this.player1Turn) {
+      this.currentPlayer = 2;
+    } else {
+      this.currentPlayer = 1;
+    }
+  }
+
   checkForWin() {
-    if (this.currentPlayer === 1) {
+    if (this.player1Turn) {
       return this.player1Score >= WIN_SCORE;
     } else {
       return this.player2Score >= WIN_SCORE;
@@ -31,7 +47,7 @@ export default class GameBoardComponent extends Component {
   }
 
   @action pass() {
-    if (this.currentPlayer === 1) {
+    if (this.player1Turn) {
       this.player1Score += this.currentTurnScore;
     } else {
       this.player2Score += this.currentTurnScore;
@@ -44,21 +60,22 @@ export default class GameBoardComponent extends Component {
 
     this.currentTurnScore = 0;
 
-    if (this.currentPlayer === 1) {
-      this.currentPlayer = 2;
-    } else {
-      this.currentPlayer = 1;
-    }
+    this.nextPlayer();
   }
 
   @action bust() {
     this.currentTurnScore = 0;
     this.currentNumber = 0;
 
-    if (this.currentPlayer === 1) {
-      this.currentPlayer = 2;
-    } else {
-      this.currentPlayer = 1;
-    }
+    this.nextPlayer();
+  }
+
+  @action newGame() {
+    this.currentPlayer = 1;
+    this.currentTurnScore = 0;
+    this.currentNumber = 0;
+    this.hasWinner = false;
+    this.player1Score = 0;
+    this.player2Score = 0;
   }
 }
