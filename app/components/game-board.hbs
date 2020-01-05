@@ -31,13 +31,23 @@
     <div class="mt-8 mx-auto flex">
       <div>
         <div class="flex">
-          <div class="flex-grow px-4 py-2 text-5xl font-semibold bg-gray-300 text-gray-800 rounded-lg rounded-r-none">
+          <div
+            class="
+              flex-grow px-4 py-2 text-5xl font-semibold bg-gray-300 text-gray-800 rounded-lg rounded-r-none
+              md:text-6xl
+            "
+          >
             {{this.currentNumber}}
-            <div class="uppercase tracking-wide text-sm text-gray-600">Die Face</div>
+            <div class="uppercase tracking-wide text-xs text-gray-600 md:text-sm">Die Face</div>
           </div>
-          <div class="flex-none w-24 px-4 py-2 text-5xl font-semibold text-right bg-gray-400 text-gray-800 rounded-lg rounded-l-none md:w-48">
+          <div
+            class="
+              flex-none w-32 px-4 py-2 text-5xl font-semibold text-right bg-gray-400 text-gray-800 rounded-lg rounded-l-none
+              md:w-48 md:text-6xl
+            "
+          >
             {{this.currentTurnScore}}
-            <div class="uppercase tracking-wide text-sm text-gray-600">Turn Score</div>
+            <div class="uppercase tracking-wide text-xs text-gray-600 md:text-sm">Turn Score</div>
           </div>
         </div>
         <div>
@@ -48,7 +58,7 @@
             <button
               type="button"
               class="
-                ml-8 w-24 h-16 font-semibold rounded-lg bg-green-400 text-green-900 focus:outline-none focus:shadow-outline
+                ml-2 w-32 h-16 font-semibold rounded-lg bg-green-400 text-green-900 focus:outline-none focus:shadow-outline
                 md:w-48 md:h-24 md:text-2xl
               "
               {{on "click" this.pass}}
@@ -72,7 +82,7 @@
             <button
               type="button"
               class="
-                ml-8 w-24 h-16 font-semibold rounded-lg bg-red-400 text-red-900 focus:outline-none focus:shadow-outline
+                ml-2 w-32 h-16 font-semibold rounded-lg bg-red-400 text-red-900 focus:outline-none focus:shadow-outline
                 md:w-48 md:h-24 md:text-2xl
               "
               {{on "click" this.bust}}
