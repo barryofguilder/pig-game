@@ -1,0 +1,95 @@
+<div class="flex justify-between text-2xl">
+  <div>
+    Player 1: <span>{{this.player1Score}}</span>
+  </div>
+  <div>
+    Player 2: <span>{{this.player2Score}}</span>
+  </div>
+</div>
+
+<div class="mt-4">
+  {{#if this.hasWinner}}
+    Player {{this.currentPlayer}} wins!!!
+  {{else}}
+    Player {{this.currentPlayer}} turn to roll
+  {{/if}}
+</div>
+
+<div class="text-2xl">
+  Current turn score: <span>{{this.currentTurnScore}}</span>
+</div>
+
+<div class="mt-8">
+  <div class="text-5xl font-semibold">
+    {{this.currentNumber}}
+  </div>
+
+  <div class="mt-8 flex">
+    <div>
+      <div>
+        <button
+          type="button"
+          class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
+          {{on "click" (fn this.numberEntered 2)}}
+        >
+          2
+        </button>
+        <button
+          type="button"
+          class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
+          {{on "click" (fn this.numberEntered 3)}}
+        >
+          3
+        </button>
+        <button
+          type="button"
+          class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
+          {{on "click" (fn this.numberEntered 4)}}
+        >
+          4
+        </button>
+      </div>
+      <div class="mt-2">
+        <button
+          type="button"
+          class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
+          {{on "click" (fn this.numberEntered 5)}}
+        >
+          5
+        </button>
+        <button
+          type="button"
+          class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
+          {{on "click" (fn this.numberEntered 6)}}
+        >
+          6
+        </button>
+        <button
+          type="button"
+          class="w-16 h-16 bg-teal-500 text-teal-100 rounded-full focus:outline-none focus:shadow-outline"
+          {{on "click" this.addToScore}}
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <div class="ml-12 w-24 flex flex-col">
+      <button
+        type="button"
+        class="h-16 font-semibold rounded-lg bg-green-400 text-green-800 focus:outline-none focus:shadow-outline"
+        {{on "click" this.pass}}
+      >
+        Pass
+      </button>
+
+      <button
+        type="button"
+        class="mt-2 h-16 font-semibold rounded-lg bg-red-400 text-red-800 focus:outline-none focus:shadow-outline"
+        {{on "click" this.bust}}
+      >
+        Bust!
+      </button>
+    </div>
+  </div>
+</div>
