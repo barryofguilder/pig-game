@@ -22,6 +22,10 @@ const purgeCSS = {
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
+    'asset-cache': {
+      include: ['assets/**/*'],
+    },
+
     postcssOptions: {
       compile: {
         plugins: [
