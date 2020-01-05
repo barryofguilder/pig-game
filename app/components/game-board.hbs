@@ -1,36 +1,23 @@
 <div class="flex justify-between">
-  <div class={{if this.player1Turn "border-b-4 border-teal-500"}}>
-    <span class="inline-block text-gray-700">
-      Player 1
-    </span>
+  <PlayerScore
+    @playerNumber={{1}}
+    @isCurrentPlayer={{this.player1Turn}}
+    @playerScore={{this.player1Score}}
+  />
 
-    <span class="inline-block ml-4 text-2xl font-semibold">{{this.player1Score}}</span>
-  </div>
-
-  <div class={{if this.player2Turn "border-b-4 border-teal-500"}}>
-    <span class="inline-block text-gray-700">
-      Player 2
-    </span>
-
-    <span class="inline-block ml-4 text-2xl font-semibold">{{this.player2Score}}</span>
-  </div>
-</div>
-
-<div class="mt-4">
-  {{#if this.hasWinner}}
-    <div class="px-4 py-2 text-2xl text-center bg-blue-200 text-blue-800 rounded">
-      Player {{this.currentPlayer}} wins!!! 🎉
-    </div>
-  {{else}}
-    <div>
-      <span class="inline-block">Current turn score:</span>
-      <span class="inline-block ml-4 text-2xl font-semibold">{{this.currentTurnScore}}</span>
-    </div>
-  {{/if}}
+  <PlayerScore
+    @playerNumber={{2}}
+    @isCurrentPlayer={{this.player2Turn}}
+    @playerScore={{this.player2Score}}
+  />
 </div>
 
 {{#if this.hasWinner}}
-  <div class="mt-8 text-center">
+  <div class="mt-12 px-4 py-2 text-2xl text-center bg-blue-200 text-blue-800 rounded">
+    Player {{this.currentPlayer}} wins!!! 🎉
+  </div>
+
+  <div class="mt-12 text-center">
     <button
       type="button"
       class="py-4 px-3 w-1/2 text-lg font-semibold bg-green-300 text-green-900 rounded-lg focus:outline-none focus:shadow-outline"
@@ -40,77 +27,60 @@
     </button>
   </div>
 {{else}}
-  <div class="mt-8">
-    <div class="text-5xl font-semibold">
-      {{this.currentNumber}}
-    </div>
-
-    <div class="mt-8 flex">
+  <div class="mt-8 flex flex-col">
+    <div class="mt-8 mx-auto flex">
       <div>
+        <div class="flex">
+          <div class="flex-grow px-4 py-2 text-5xl font-semibold bg-gray-300 text-gray-800 rounded-lg rounded-r-none">
+            {{this.currentNumber}}
+            <div class="uppercase tracking-wide text-sm text-gray-600">Die Face</div>
+          </div>
+          <div class="flex-none w-24 px-4 py-2 text-5xl font-semibold text-right bg-gray-400 text-gray-800 rounded-lg rounded-l-none md:w-48">
+            {{this.currentTurnScore}}
+            <div class="uppercase tracking-wide text-sm text-gray-600">Turn Score</div>
+          </div>
+        </div>
         <div>
-          <button
-            type="button"
-            class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
-            {{on "click" (fn this.numberEntered 2)}}
-          >
-            2
-          </button>
-          <button
-            type="button"
-            class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
-            {{on "click" (fn this.numberEntered 3)}}
-          >
-            3
-          </button>
-          <button
-            type="button"
-            class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
-            {{on "click" (fn this.numberEntered 4)}}
-          >
-            4
-          </button>
+          <div class="mt-8">
+            <NumberButton @number={{2}} @onClick={{this.numberEntered}} />
+            <NumberButton @number={{3}} @onClick={{this.numberEntered}} />
+            <NumberButton @number={{4}} @onClick={{this.numberEntered}} />
+            <button
+              type="button"
+              class="
+                ml-8 w-24 h-16 font-semibold rounded-lg bg-green-400 text-green-900 focus:outline-none focus:shadow-outline
+                md:w-48 md:h-24 md:text-2xl
+              "
+              {{on "click" this.pass}}
+            >
+              Pass
+            </button>
+          </div>
+          <div class="mt-2">
+            <NumberButton @number={{5}} @onClick={{this.numberEntered}} />
+            <NumberButton @number={{6}} @onClick={{this.numberEntered}} />
+            <button
+              type="button"
+              class="
+                w-16 h-16 text-xl bg-teal-500 text-teal-100 rounded-full focus:outline-none focus:shadow-outline
+                md:w-24 md:h-24 md:text-4xl
+              "
+              {{on "click" this.addToScore}}
+            >
+              +
+            </button>
+            <button
+              type="button"
+              class="
+                ml-8 w-24 h-16 font-semibold rounded-lg bg-red-400 text-red-900 focus:outline-none focus:shadow-outline
+                md:w-48 md:h-24 md:text-2xl
+              "
+              {{on "click" this.bust}}
+            >
+              Bust!
+            </button>
+          </div>
         </div>
-        <div class="mt-2">
-          <button
-            type="button"
-            class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
-            {{on "click" (fn this.numberEntered 5)}}
-          >
-            5
-          </button>
-          <button
-            type="button"
-            class="w-16 h-16 bg-purple-500 text-purple-100 rounded-full focus:outline-none focus:shadow-outline"
-            {{on "click" (fn this.numberEntered 6)}}
-          >
-            6
-          </button>
-          <button
-            type="button"
-            class="w-16 h-16 leading-none text-xl bg-teal-500 text-teal-100 rounded-full focus:outline-none focus:shadow-outline"
-            {{on "click" this.addToScore}}
-          >
-            +
-          </button>
-        </div>
-      </div>
-
-      <div class="ml-12 w-24 flex flex-col">
-        <button
-          type="button"
-          class="h-16 font-semibold rounded-lg bg-green-400 text-green-800 focus:outline-none focus:shadow-outline"
-          {{on "click" this.pass}}
-        >
-          Pass
-        </button>
-
-        <button
-          type="button"
-          class="mt-2 h-16 font-semibold rounded-lg bg-red-400 text-red-800 focus:outline-none focus:shadow-outline"
-          {{on "click" this.bust}}
-        >
-          Bust!
-        </button>
       </div>
     </div>
   </div>

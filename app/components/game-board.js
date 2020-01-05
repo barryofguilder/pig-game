@@ -42,7 +42,7 @@ export default class GameBoardComponent extends Component {
   }
 
   @action addToScore() {
-    this.currentTurnScore += parseInt(this.currentNumber);
+    this.currentTurnScore += this.currentNumber;
     this.currentNumber = 0;
   }
 
