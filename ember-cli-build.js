@@ -19,9 +19,18 @@ const purgeCSS = {
     defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
   },
 };
+const disabledAddons = [];
+if (!isProduction && !process.env.ENABLE_SW) {
+  // disable service workers by default for dev and testing
+  disabledAddons.push('ember-service-worker');
+}
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
+    addons: {
+      blacklist: disabledAddons,
+    },
+
     'asset-cache': {
       include: ['assets/**/*'],
     },
