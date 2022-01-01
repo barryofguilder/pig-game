@@ -13,7 +13,7 @@ export default class ApplicationController extends Controller {
   @tracked _players;
 
   clonePlayers(players) {
-    return players.map(player => {
+    return players.map((player) => {
       let newPlayer = new Player(player.number, player.enabled);
       newPlayer.name = player.name;
       newPlayer.score = player.score;
@@ -42,6 +42,11 @@ export default class ApplicationController extends Controller {
     });
   }
 
+  @action resetGame() {
+    this.players = this.clonePlayers(this._players);
+    this.showOptions = false;
+  }
+
   @action cancelOptions() {
     this._players = [];
     this.showOptions = false;
@@ -50,8 +55,7 @@ export default class ApplicationController extends Controller {
   @action saveOptions(event) {
     event.preventDefault();
 
-    this.players = this.clonePlayers(this._players);
-    this.showOptions = false;
+    this.resetGame();
   }
 
   constructor() {
