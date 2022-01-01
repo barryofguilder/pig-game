@@ -7,7 +7,7 @@
 
       <button
         type="button"
-        class="ml-2 text-gray-900 hover:text-gray-500 focus:outline-none focus:shadow-outline"
+        class="ml-2 text-gray-900 hover:text-gray-500 focus:outline-none focus:ring-2 focus:focus:ring-blue-500"
         {{on "click" this.showOptionsDialog}}
       >
         <span class="sr-only">Options</span>
@@ -45,7 +45,7 @@
               <div>
                 <button
                   type="button"
-                  class="w-8 h-8 text-centezr bg-teal-600 text-white text-xl font-bold rounded-full hover:bg-teal-500 focus:outline-none focus:shadow-outline"
+                  class="w-8 h-8 text-centezr bg-teal-600 text-white text-xl font-bold rounded-full hover:bg-teal-500 focus:outline-none focus:ring-2 focus:focus:ring-teal-800"
                   {{on "click" (fn this.changePlayers -1)}}
                 >
                   -
@@ -55,7 +55,7 @@
                 </span>
                 <button
                   type="button"
-                  class="ml-2 w-8 h-8 text-center bg-teal-600 text-white text-xl font-bold rounded-full hover:bg-teal-500 focus:outline-none focus:shadow-outline"
+                  class="ml-2 w-8 h-8 text-center bg-teal-600 text-white text-xl font-bold rounded-full hover:bg-teal-500 focus:outline-none focus:ring-2 focus:focus:ring-teal-800"
                   {{on "click" (fn this.changePlayers 1)}}
                 >
                   +
@@ -77,7 +77,7 @@
                 <label for="player-{{index}}" class="flex-0">Player {{player.number}}</label>
                 <Input
                   id="player-{{index}}"
-                  class="flex-1 ml-4 px-4 py-2 bg-white shadow-inset border rounded focus:outline-none focus:shadow-outline disabled:bg-gray-200 disabled:text-gray-600"
+                  class="flex-1 ml-4 px-4 py-2 bg-white shadow-inset border rounded focus:outline-none focus:ring-2 focus:focus:ring-blue-500 disabled:bg-gray-200 disabled:text-gray-600"
                   disabled={{not player.enabled}}
                   @value={{player.name}}
                 />
@@ -88,14 +88,14 @@
           <div class="mt-6 flex justify-end">
             <button
               type="button"
-              class="px-4 py-2 border border-purple-500 rounded hover:bg-purple-200 focus:outline-none focus:shadow-outline"
+              class="px-4 py-2 border border-purple-500 rounded hover:bg-purple-200 focus:outline-none focus:ring-2 focus:focus:ring-purple-800"
               {{on "click" this.cancelOptions}}
             >
               Cancel
             </button>
             <button
               type="submit"
-              class="ml-2 px-4 py-2 bg-purple-500 border border-purple-500 text-white rounded hover:bg-purple-400 focus:outline-none focus:shadow-outline"
+              class="ml-2 px-4 py-2 bg-purple-500 border border-purple-500 text-white rounded hover:bg-purple-400 focus:outline-none focus:ring-2 focus:focus:ring-purple-800"
             >
               Save
             </button>
