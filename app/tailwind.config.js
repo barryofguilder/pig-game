@@ -1,10 +1,7 @@
 module.exports = {
+  content: ['./app/**/*.{css,hbs,js}', './app/index.html'],
   theme: {
     extend: {},
-  },
-  variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'disabled'],
-    textColor: ['responsive', 'hover', 'focus', 'disabled'],
   },
   plugins: [],
 };

@@ -1,13 +1,12 @@
-@import "tailwindcss/base";
+@import 'tailwindcss/base';
 
-@import "tailwindcss/components";
+@import 'tailwindcss/components';
 
-@import "tailwindcss/utilities";
+@import 'tailwindcss/utilities';
 
-@import "ember-modal-dialog/ember-modal-structure";
-/* @import "ember-modal-dialog/ember-modal-appearance"; */
+@import 'ember-modal-dialog/ember-modal-structure';
 
 .modal-overlay {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   @apply flex justify-center w-screen h-screen fixed top-0 left-0;
 }
