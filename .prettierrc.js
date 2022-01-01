@@ -1,7 +1,14 @@
 'use strict';
 
 module.exports = {
-  singleQuote: true,
-  trailingComma: 'es5',
   printWidth: 100,
+  singleQuote: true,
+  overrides: [
+    {
+      files: 'app/**/*.hbs',
+      options: {
+        singleQuote: false,
+      },
+    },
+  ],
 };
