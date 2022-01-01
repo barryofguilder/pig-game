@@ -16,7 +16,7 @@ const purgeCSS = {
     ],
 
     // Include any special characters you're using in this regular expression.
-    defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+    defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
   },
 };
 const disabledAddons = [];
@@ -25,7 +25,7 @@ if (!isProduction && !process.env.ENABLE_SW) {
   disabledAddons.push('ember-service-worker');
 }
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     addons: {
       blacklist: disabledAddons,
