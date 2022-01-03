@@ -26,98 +26,12 @@
   </div>
 
   <div class="mt-4">
-    <GameBoard @players={{this.players}} />
+    <GameBoard />
   </div>
 
   {{outlet}}
 </div>
 
 {{#if this.showOptions}}
-  <ModalDialog
-    @overlayClass="modal-overlay"
-    @wrapperClass="px-6 flex justify-center w-screen h-screen fixed top-0 left-0"
-    @containerClass="px-6 w-full md:px-0"
-  >
-    <div class="mx-auto p-6 w-full bg-white rounded-lg shadow-lg md:w-2/3">
-      <div>
-        <h2 class="text-xl font-semibold">Options</h2>
-
-        <div class="mt-6 flex flex-col md:flex-0 md:flex-row md:items-center md:justify-between">
-          <div>
-            <label class="flex-0">Number of players</label>
-            <div class="flex items-center w-full mt-2">
-              <div>
-                <button
-                  type="button"
-                  class="w-8 h-8 text-center bg-teal-600 text-white text-xl font-bold rounded-full hover:bg-teal-500 focus:outline-none focus:ring-2 focus:focus:ring-teal-800"
-                  {{on "click" (fn this.changePlayers -1)}}
-                >
-                  -
-                </button>
-                <span class="inline-block ml-2 w-8 font-semibold text-2xl text-center">
-                  {{this.numberOfPlayers}}
-                </span>
-                <button
-                  type="button"
-                  class="ml-2 w-8 h-8 text-center bg-teal-600 text-white text-xl font-bold rounded-full hover:bg-teal-500 focus:outline-none focus:ring-2 focus:focus:ring-teal-800"
-                  {{on "click" (fn this.changePlayers 1)}}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="mt-6 md:flex-1 md:mt-0 md:ml-6">
-            <div class="px-2 py-4 bg-yellow-200 text-yellow-900 border border-yellow-300 rounded">
-              Changing number of players resets the game.
-            </div>
-          </div>
-        </div>
-
-        <form {{on "submit" this.saveOptions}}>
-          {{#each this._players as |player index|}}
-            <div class="mt-6">
-              <div class="flex items-center w-full">
-                <label for="player-{{index}}" class="flex-0">Player {{player.number}}</label>
-                <Input
-                  id="player-{{index}}"
-                  class="flex-1 ml-4 px-4 py-2 bg-white shadow-inset border rounded focus:outline-none focus:ring-2 focus:focus:ring-blue-500 disabled:bg-gray-200 disabled:text-gray-600"
-                  disabled={{not player.enabled}}
-                  @value={{player.name}}
-                />
-              </div>
-            </div>
-          {{/each}}
-
-          <div class="mt-6 flex justify-between">
-            <div>
-              <button
-                type="button"
-                class="px-4 py-2 border border-red-500 rounded hover:bg-red-200 focus:outline-none focus:ring-2 focus:focus:ring-red-800"
-                {{on "click" this.resetGame}}
-              >
-                Reset Game
-              </button>
-            </div>
-
-            <div class="flex justify-end">
-              <button
-                type="button"
-                class="px-4 py-2 border border-purple-500 rounded hover:bg-purple-200 focus:outline-none focus:ring-2 focus:focus:ring-purple-800"
-                {{on "click" this.cancelOptions}}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                class="ml-2 px-4 py-2 bg-purple-500 border border-purple-500 text-white rounded hover:bg-purple-400 focus:outline-none focus:ring-2 focus:focus:ring-purple-800"
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </ModalDialog>
+  <OptionsForm @onFormClosed={{this.formClosed}} />
 {{/if}}
