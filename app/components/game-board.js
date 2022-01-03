@@ -1,21 +1,24 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 const WIN_SCORE = 100;
 
 export default class GameBoardComponent extends Component {
+  @service game;
+
   @tracked currentPlayerNumber = 1;
   @tracked currentNumber = 0;
   @tracked currentTurnScore = 0;
   @tracked hasWinner = false;
 
   get players() {
-    return this.args.players.filter(player => player.enabled);
+    return this.game.players.filter((player) => player.enabled);
   }
 
   get currentPlayer() {
-    return this.players.find(player => player.number === this.currentPlayerNumber);
+    return this.players.find((player) => player.number === this.currentPlayerNumber);
   }
 
   nextPlayer() {
@@ -64,7 +67,8 @@ export default class GameBoardComponent extends Component {
     this.currentNumber = 0;
     this.hasWinner = false;
 
-    this.players.forEach(player => {
+    // TODO: Update this to call a `resetGame` function on the game service
+    this.players.forEach((player) => {
       player.score = 0;
     });
   }
