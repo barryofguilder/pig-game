@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(/* environment, appConfig */) {
+module.exports = function (/* environment, appConfig */) {
   // See https://zonkyio.github.io/ember-web-app for a list of
   // supported properties
 
