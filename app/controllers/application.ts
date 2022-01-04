@@ -5,11 +5,13 @@ import { action } from '@ember/object';
 export default class ApplicationController extends Controller {
   @tracked showOptions = false;
 
-  @action showOptionsDialog() {
+  @action
+  showOptionsDialog() {
     this.showOptions = true;
   }
 
-  @action formClosed() {
+  @action
+  formClosed() {
     this.showOptions = false;
   }
 }
