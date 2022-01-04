@@ -4,22 +4,29 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { MAX_PLAYER_COUNT, MIN_PLAYER_COUNT } from '../services/game';
 import Player from '../models/player';
+import GameService from '../services/game';
 
-export default class OptionsFormComponent extends Component {
-  @service game;
+export interface OptionsFormComponentArgs {
+  onFormClosed: () => unknown;
+}
 
-  @tracked numberOfPlayers = this.game.players.length;
-  @tracked players;
+export default class OptionsFormComponent extends Component<OptionsFormComponentArgs> {
+  @service declare game: GameService;
 
-  originalPlayerCount = this.game.players.length;
+  @tracked numberOfPlayers: number;
+  @tracked players: Player[];
+
+  originalPlayerCount: number;
 
   get shouldResetScores() {
     return this.originalPlayerCount !== this.numberOfPlayers;
   }
 
-  constructor() {
-    super(...arguments);
+  constructor(owner: unknown, args: OptionsFormComponentArgs) {
+    super(owner, args);
 
+    this.originalPlayerCount = this.game.players.length;
+    this.numberOfPlayers = this.game.players.length;
     this.players = this.clonePlayers(this.game.players);
 
     if (this.players.length < MAX_PLAYER_COUNT) {
@@ -30,7 +37,7 @@ export default class OptionsFormComponent extends Component {
     }
   }
 
-  clonePlayers(players) {
+  clonePlayers(players: Player[]) {
     return players.map((player) => {
       let newPlayer = new Player(player.number, player.enabled);
       newPlayer.name = player.name;
@@ -39,7 +46,7 @@ export default class OptionsFormComponent extends Component {
     });
   }
 
-  @action changePlayers(number) {
+  @action changePlayers(number: number) {
     this.numberOfPlayers += number;
 
     if (this.numberOfPlayers < MIN_PLAYER_COUNT) {
@@ -69,7 +76,7 @@ export default class OptionsFormComponent extends Component {
     }
   }
 
-  @action saveOptions(event) {
+  @action saveOptions(event: Event) {
     event.preventDefault();
 
     this.game.players = this.clonePlayers(this.players.filter((player) => player.enabled));
