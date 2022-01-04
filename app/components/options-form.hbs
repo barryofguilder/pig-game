@@ -43,7 +43,10 @@
         {{#each this.players as |player index|}}
           <div class="mt-6">
             <div class="flex items-center w-full">
-              <label for="player-{{index}}" class="flex-0">Player {{player.number}}</label>
+              <label for="player-{{index}}" class="shrink-0">
+                Player
+                {{player.number}}
+              </label>
               <Input
                 id="player-{{index}}"
                 class="flex-1 ml-4 px-4 py-2 bg-white shadow-inset border rounded focus:outline-none focus:ring-2 focus:focus:ring-blue-500 disabled:bg-gray-200 disabled:text-gray-600"
@@ -61,7 +64,7 @@
               class="px-4 py-2 border border-red-500 rounded hover:bg-red-200 focus:outline-none focus:ring-2 focus:focus:ring-red-800"
               {{on "click" this.resetGame}}
             >
-              Reset Game
+              Reset
             </button>
           </div>
 
