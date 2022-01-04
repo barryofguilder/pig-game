@@ -8,20 +8,33 @@ import Player from '../models/player';
 export default class OptionsFormComponent extends Component {
   @service game;
 
-  @tracked numberOfPlayers = this.game.numberOfPlayers;
+  @tracked numberOfPlayers = this.game.players.length;
   @tracked players;
+
+  originalPlayerCount = this.game.players.length;
+
+  get shouldResetScores() {
+    return this.originalPlayerCount !== this.numberOfPlayers;
+  }
 
   constructor() {
     super(...arguments);
 
     this.players = this.clonePlayers(this.game.players);
+
+    if (this.players.length < MAX_PLAYER_COUNT) {
+      for (let i = this.players.length; i < MAX_PLAYER_COUNT; i++) {
+        let newPlayer = new Player(i + 1);
+        this.players.push(newPlayer);
+      }
+    }
   }
 
   clonePlayers(players) {
     return players.map((player) => {
       let newPlayer = new Player(player.number, player.enabled);
       newPlayer.name = player.name;
-      newPlayer.score = 0;
+      newPlayer.score = this.shouldResetScores ? 0 : player.score;
       return newPlayer;
     });
   }
@@ -43,7 +56,7 @@ export default class OptionsFormComponent extends Component {
   }
 
   @action resetGame() {
-    this.game.players = this.clonePlayers(this.players);
+    this.game.newGame();
 
     if (this.args.onFormClosed) {
       this.args.onFormClosed();
@@ -59,6 +72,14 @@ export default class OptionsFormComponent extends Component {
   @action saveOptions(event) {
     event.preventDefault();
 
-    this.resetGame();
+    this.game.players = this.clonePlayers(this.players.filter((player) => player.enabled));
+
+    if (this.shouldResetScores) {
+      this.game.newGame();
+    }
+
+    if (this.args.onFormClosed) {
+      this.args.onFormClosed();
+    }
   }
 }

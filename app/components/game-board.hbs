@@ -1,15 +1,15 @@
-<div class="flex flex-wrap justify-between" {{did-update this.newGame @players}}>
-  {{#each this.players as |player|}}
+<div class="flex flex-wrap justify-between" {{did-update this.game.newGame @players}}>
+  {{#each this.game.players as |player|}}
     <PlayerScore
       @player={{player}}
-      @isCurrentPlayer={{eq this.currentPlayer.number player.number}}
+      @isCurrentPlayer={{eq this.game.currentPlayer.number player.number}}
     />
   {{/each}}
 </div>
 
-{{#if this.hasWinner}}
+{{#if this.game.hasWinner}}
   <div class="mt-12 px-4 py-2 text-2xl text-center bg-blue-200 text-blue-800 rounded">
-    {{this.currentPlayer.name}}
+    {{this.game.currentPlayer.name}}
     wins!!! 🎉
   </div>
 
@@ -17,7 +17,7 @@
     <button
       type="button"
       class="py-4 px-3 w-1/2 text-lg font-semibold bg-green-300 text-green-900 rounded-lg focus:outline-none focus:ring-blue-500"
-      {{on "click" this.newGame}}
+      {{on "click" this.game.newGame}}
     >
       New Game
     </button>
@@ -30,43 +30,43 @@
           <div
             class="grow px-4 py-2 text-5xl font-semibold bg-gray-200 text-gray-800 rounded-lg rounded-r-none md:text-6xl"
           >
-            {{this.currentNumber}}
+            {{this.game.currentNumber}}
             <div class="uppercase tracking-wide text-xs text-gray-600 md:text-sm">Die Face</div>
           </div>
           <div
             class="flex-none w-32 px-4 py-2 text-5xl font-semibold text-right bg-gray-300 text-gray-800 rounded-lg rounded-l-none md:w-48 md:text-6xl"
           >
-            {{this.currentTurnScore}}
+            {{this.game.currentTurnScore}}
             <div class="uppercase tracking-wide text-xs text-gray-600 md:text-sm">Turn Score</div>
           </div>
         </div>
         <div>
           <div class="mt-8">
-            <NumberButton @number={{2}} @onClick={{this.numberEntered}} />
-            <NumberButton @number={{3}} @onClick={{this.numberEntered}} />
-            <NumberButton @number={{4}} @onClick={{this.numberEntered}} />
+            <NumberButton @number={{2}} @onClick={{this.game.numberEntered}} />
+            <NumberButton @number={{3}} @onClick={{this.game.numberEntered}} />
+            <NumberButton @number={{4}} @onClick={{this.game.numberEntered}} />
             <button
               type="button"
               class="ml-2 w-32 h-16 font-semibold rounded-lg bg-green-400 text-green-900 focus:outline-none focus:ring-2 focus:focus:ring-green-800 md:w-48 md:h-24 md:text-2xl"
-              {{on "click" this.pass}}
+              {{on "click" this.game.pass}}
             >
               Pass
             </button>
           </div>
           <div class="mt-2">
-            <NumberButton @number={{5}} @onClick={{this.numberEntered}} />
-            <NumberButton @number={{6}} @onClick={{this.numberEntered}} />
+            <NumberButton @number={{5}} @onClick={{this.game.numberEntered}} />
+            <NumberButton @number={{6}} @onClick={{this.game.numberEntered}} />
             <button
               type="button"
               class="w-16 h-16 text-xl bg-teal-500 text-teal-100 rounded-full focus:outline-none focus:ring-2 focus:focus:ring-teal-800 md:w-24 md:h-24 md:text-4xl"
-              {{on "click" this.addToScore}}
+              {{on "click" this.game.addToScore}}
             >
               +
             </button>
             <button
               type="button"
               class="ml-2 w-32 h-16 font-semibold rounded-lg bg-red-400 text-red-900 focus:outline-none focus:ring-2 focus:focus:ring-red-800 md:w-48 md:h-24 md:text-2xl"
-              {{on "click" this.bust}}
+              {{on "click" this.game.bust}}
             >
               Bust!
             </button>
