@@ -24,7 +24,7 @@
   </div>
 {{else}}
   <div class="mt-8 flex flex-col">
-    <div class="mt-8 mx-auto flex">
+    <div class="mt-8 mx-auto flex flex-col">
       <div>
         <div class="flex">
           <div
@@ -47,7 +47,7 @@
             <NumberButton @number={{4}} @onClick={{this.game.numberEntered}} />
             <button
               type="button"
-              class="ml-2 w-32 h-16 font-semibold rounded-lg bg-green-400 text-green-900 focus:outline-none focus:ring-2 focus:focus:ring-green-800 md:w-48 md:h-24 md:text-2xl"
+              class="ml-2 w-32 h-16 font-semibold rounded-lg bg-green-400 text-green-900 focus:outline-none focus:ring-2 focus:ring-green-800 md:w-48 md:h-24 md:text-2xl"
               {{on "click" this.game.pass}}
             >
               Pass
@@ -58,20 +58,31 @@
             <NumberButton @number={{6}} @onClick={{this.game.numberEntered}} />
             <button
               type="button"
-              class="w-16 h-16 text-xl bg-teal-500 text-teal-100 rounded-full focus:outline-none focus:ring-2 focus:focus:ring-teal-800 md:w-24 md:h-24 md:text-4xl"
+              class="w-16 h-16 text-xl bg-teal-500 text-teal-100 rounded-full focus:outline-none focus:ring-2 focus:ring-teal-800 md:w-24 md:h-24 md:text-4xl"
               {{on "click" this.game.addToScore}}
             >
               +
             </button>
             <button
               type="button"
-              class="ml-2 w-32 h-16 font-semibold rounded-lg bg-red-400 text-red-900 focus:outline-none focus:ring-2 focus:focus:ring-red-800 md:w-48 md:h-24 md:text-2xl"
+              class="ml-2 w-32 h-16 font-semibold rounded-lg bg-red-400 text-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 md:w-48 md:h-24 md:text-2xl"
               {{on "click" this.game.bust}}
             >
               Bust!
             </button>
           </div>
         </div>
+      </div>
+
+      <div class="mt-8 flex justify-end">
+        <button
+          type="button"
+          class="px-3 py-1 font-semibold rounded-lg text-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 disabled:ring-gray-400 disabled:bg-gray-300 disabled:text-gray-500"
+          disabled={{this.game.undoDisabled}}
+          {{on "click" this.game.undo}}
+        >
+          Undo
+        </button>
       </div>
     </div>
   </div>

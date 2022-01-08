@@ -1,6 +1,6 @@
 import { tracked } from '@glimmer/tracking';
 
-export default class Player {
+export class Player {
   @tracked number: number;
   @tracked enabled: boolean;
   @tracked name: string;

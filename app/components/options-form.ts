@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { MAX_PLAYER_COUNT, MIN_PLAYER_COUNT } from '../services/game';
-import Player from '../models/player';
+import { Player } from '../models/player';
 import GameService from '../services/game';
 
 export interface OptionsFormComponentArgs {
