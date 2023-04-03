@@ -106,10 +106,13 @@
     "typescript": "^5.0.3",
     "webpack": "^5.75.0"
   },
-  "engines": {
-    "node": "14.* || 16.* || >= 18"
-  },
   "ember": {
     "edition": "octane"
+  },
+  "engines": {
+    "node": "18.15.0"
+  },
+  "volta": {
+    "node": "18.15.0"
   }
 }
