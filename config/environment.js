@@ -42,7 +42,7 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
-    ENV.rootURL = 'pig-game';
+    ENV.rootURL = '/pig-game/';
   }
 
   return ENV;

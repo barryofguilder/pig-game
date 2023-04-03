@@ -19,6 +19,10 @@ module.exports = function (defaults) {
       include: ['assets/**/*'],
     },
 
+    'ember-service-worker': {
+      registrationStrategy: 'inline',
+    },
+
     postcssOptions: {
       compile: {
         plugins: [
