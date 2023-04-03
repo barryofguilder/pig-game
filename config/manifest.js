@@ -8,7 +8,7 @@ module.exports = function (/* environment, appConfig */) {
     name: 'Pig Game',
     short_name: 'Pig Game',
     description: 'A companion help to help play the dice game of "Pig".',
-    start_url: '/pig-game',
+    start_url: '/',
     display: 'standalone',
     background_color: '#9F7AEA',
     theme_color: '#9F7AEA',
