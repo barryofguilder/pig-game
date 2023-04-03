@@ -21,7 +21,8 @@
     "prettier": "prettier --write \"**/*.{hbs,html,js,ts}\"",
     "start": "TAILWIND_MODE=watch ember serve",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
-    "test:ember": "ember test"
+    "test:ember": "ember test",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
