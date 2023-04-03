@@ -17,9 +17,8 @@ export default class GameService extends Service {
   @tracked hasWinner = false;
   @tracked plays: Play[] = A([]);
 
-  get currentPlayer(): Player {
-    let current = this.players.find((player) => player.number === this.currentPlayerNumber);
-    return current ? current : this.players[0];
+  get currentPlayer(): Player | undefined {
+    return this.players.find((player) => player.number === this.currentPlayerNumber);
   }
 
   get undoDisabled(): boolean {
@@ -29,11 +28,13 @@ export default class GameService extends Service {
   constructor() {
     super(...arguments);
 
-    this.players = [];
+    let players: Player[] = [];
 
     for (let i = 0; i < MIN_PLAYER_COUNT; i++) {
-      this.players.push(new Player(i + 1, true));
+      players = [...players, new Player(i + 1, true)];
     }
+
+    this.players = players;
   }
 
   resetGame() {
@@ -41,7 +42,7 @@ export default class GameService extends Service {
       player.score = 0;
     });
 
-    this.plays = A([]);
+    this.plays = [];
   }
 
   nextPlayer() {
@@ -65,7 +66,7 @@ export default class GameService extends Service {
   }
 
   addPlay(play: Play): void {
-    this.plays.pushObject(play);
+    this.plays = [...this.plays, play];
   }
 
   @action
@@ -75,6 +76,10 @@ export default class GameService extends Service {
 
   @action
   addToScore() {
+    if (!this.currentPlayer) {
+      return;
+    }
+
     this.addPlay(new Play(this.currentPlayer, 'roll', this.currentNumber));
     this.currentTurnScore += this.currentNumber;
     this.currentNumber = 0;
@@ -82,6 +87,10 @@ export default class GameService extends Service {
 
   @action
   pass() {
+    if (!this.currentPlayer) {
+      return;
+    }
+
     this.addPlay(new Play(this.currentPlayer, 'pass', this.currentTurnScore));
     this.currentPlayer.score += this.currentTurnScore;
     this.currentNumber = 0;
@@ -98,6 +107,10 @@ export default class GameService extends Service {
 
   @action
   bust() {
+    if (!this.currentPlayer) {
+      return;
+    }
+
     this.addPlay(new Play(this.currentPlayer, 'bust', this.currentTurnScore));
     this.currentTurnScore = 0;
     this.currentNumber = 0;
@@ -117,7 +130,11 @@ export default class GameService extends Service {
 
   @action
   undo() {
-    const play = this.plays.popObject();
+    const play = this.plays.pop();
+
+    if (play === undefined || !this.currentPlayer) {
+      return;
+    }
 
     if (play.action === 'bust') {
       // Go to previous player and update current turn score.

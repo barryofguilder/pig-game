@@ -10,9 +10,9 @@ if (!isProduction && !process.env.ENABLE_SW) {
 }
 
 module.exports = function (defaults) {
-  let app = new EmberApp(defaults, {
+  const app = new EmberApp(defaults, {
     addons: {
-      blacklist: disabledAddons,
+      exclude: disabledAddons,
     },
 
     'asset-cache': {
