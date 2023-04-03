@@ -2,12 +2,11 @@
 
 module.exports = {
   printWidth: 100,
-  singleQuote: true,
   overrides: [
     {
-      files: 'app/**/*.hbs',
+      files: '*.{js,ts}',
       options: {
-        singleQuote: false,
+        singleQuote: true,
       },
     },
   ],
