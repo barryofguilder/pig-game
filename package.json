@@ -1,9 +1,9 @@
 {
   "name": "pig-game",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "description": "A companion help to help play the dice game of 'Pig'.",
-  "repository": "",
+  "repository": "https://github.com/barryofguilder/pig-game.git",
   "license": "MIT",
   "author": "Jason Barry <jbarry@hey.com>",
   "directories": {
