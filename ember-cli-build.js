@@ -25,11 +25,7 @@ module.exports = function (defaults) {
 
     postcssOptions: {
       compile: {
-        plugins: [
-          require('postcss-import')({ path: ['node_modules'] }),
-          require('tailwindcss')('app/tailwind.config.js'),
-          require('autoprefixer'),
-        ],
+        plugins: [require('tailwindcss')('app/tailwind.config.js'), require('autoprefixer')],
         cacheInclude: [/.*\.(css|hbs)$/, /.tailwind\.config\.js$/],
       },
     },
