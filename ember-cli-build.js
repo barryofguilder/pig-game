@@ -22,14 +22,35 @@ module.exports = function (defaults) {
     'ember-service-worker': {
       registrationStrategy: 'inline',
     },
+  });
 
-    postcssOptions: {
-      compile: {
-        plugins: [require('tailwindcss')('app/tailwind.config.js'), require('autoprefixer')],
-        cacheInclude: [/.*\.(css|hbs)$/, /.tailwind\.config\.js$/],
+  const { Webpack } = require('@embroider/webpack');
+  return require('@embroider/compat').compatBuild(app, Webpack, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+    packagerOptions: {
+      webpackConfig: {
+        module: {
+          rules: [
+            {
+              test: /\.css$/i,
+              use: [
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    postcssOptions: {
+                      config: 'postcss.config.js',
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
       },
     },
   });
-
-  return app.toTree();
 };
